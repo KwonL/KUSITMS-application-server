@@ -79,12 +79,82 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
   font-size: 15px;
   font-family: 'Nanum Myeongjo', serif;
 }
+.imagePreview {
+  width: 100%;
+  height: 180px;
+  background-position: center center;
+  {% if image.url %}
+    background:url({{ image.url }});
+  {% else %}
+    background:url(/static/assets/images/anonymous.png);
+  {% endif %}
+  background-color:#fff;
+  background-size: cover;
+  background-repeat:no-repeat;
+  display: inline-block;
+  box-shadow:0px -3px 6px 2px rgba(0,0,0,0.2);
+}
+.btn-primary
+{
+  display:block;
+  border-radius:0px;
+  box-shadow:0px 4px 6px 2px rgba(0,0,0,0.2);
+  margin-top:-5px;
+}
+.imgUp
+{
+  margin-bottom:15px;
+}
+.del
+{
+  position:absolute;
+  top:0px;
+  right:15px;
+  width:30px;
+  height:30px;
+  text-align:center;
+  line-height:30px;
+  background-color:rgba(255,255,255,0.6);
+  cursor:pointer;
+}
+.imgAdd
+{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background-color:#4bd7ef;
+  color:#fff;
+  box-shadow:0px 0px 2px 1px rgba(0,0,0,0.2);
+  text-align:center;
+  line-height:30px;
+  margin-top:0px;
+  cursor:pointer;
+  font-size:15px;
+}
 </style>
   <script async  src="https://cdn.ampproject.org/v0.js"></script>
   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
   <script async custom-element="amp-animation" src="https://cdn.ampproject.org/v0/amp-animation-0.1.js"></script>
   <script async custom-element="amp-position-observer" src="https://cdn.ampproject.org/v0/amp-position-observer-0.1.js"></script>
   <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+  <script>
+  $(function() {
+      $(document).on("change",".uploadFile", function() {
+        var uploadFile = $(this);
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+        var reader = new FileReader(); // instance of the FileReader
+        reader.readAsDataURL(files[0]); // read the local file
+
+        reader.onloadend = function(){ // set image data as background of div
+          uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url("+this.result+")");
+        }
+      });
+  });
+  </script>
 </head>
 <body>
 {% if error_msg %}
@@ -149,14 +219,19 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
 
 
 <div class="apply-container">
-  <form action="/apply/" method="POST">
+  <form action="/apply/" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <p style="font-family: 'Malgun Gothic'; text-align: center; font-size: 50px;"><b>KUS<span style="color:#2B689C;">IT</span><span style="color:#259385;">M</span>S</span> 회원 지원서</b></p>
 
     <!-- 기본 프로필 -->
     <div class="form-group row">
-      <div class="col-sm-3">
-        <img src="/static/assets/images/anonymous.png" class="img-thumbnail" style="width: auto; height: auto;" />
+      <div class="col-sm-3 imgUp">
+        <div class="imagePreview"></div>
+        <div class="custom-file">
+          <input type="file" id="profile-photo" name="image" accept="image/*" class="uploadFile custom-file-input" required>
+          <label class="custom-file-label" for="profile-photo">사진 선택</label>
+        </div>
+        <!-- <img src="/static/assets/images/anonymous.png" class="img-thumbnail" style="width: auto; height: auto;" /> -->
       </div>
       <div class="col">
         <div class="row">

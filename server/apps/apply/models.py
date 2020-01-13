@@ -30,7 +30,10 @@ def get_image_name(instance, filename):
 
 
 class ApplyForm(models.Model):
-    image = models.ImageField(upload_to=get_image_name, null=True, blank=True)
+    image = models.ImageField(
+        upload_to=get_image_name, null=False, blank=False,
+        default=''
+    )
     user = models.ForeignKey(
         'account.User', on_delete=models.SET_NULL, related_name='applications',
         null=True, blank=False

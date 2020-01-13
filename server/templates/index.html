@@ -56,6 +56,7 @@ body{font-family: Roboto;}blockquote{border-color: #2B689C;}.display-1{font-fami
             </button>
             <div class="sidebar mbr-white" data-app-modern-menu="true">
               {% if user.is_authenticated %}
+                <p class="text-primary display-7">{{ user.username }}님</p>
                 <a class="text-primary display-7" href="/account/logout/">로그아웃</a>
               {% else %}
                 <a class="text-primary display-7" href="/login/">로그인</a>
@@ -78,6 +79,7 @@ body{font-family: Roboto;}blockquote{border-color: #2B689C;}.display-1{font-fami
                   <a href="/"></a>
               </amp-img>
           </span>
+          <p class="brand-name mbr-fonts-style mbr-bold display-5">KUS<span style="color:#2B689C;">IT</span><span style="color:#259385;">M</span>S 21기</p>
       </div>
     </nav>
     

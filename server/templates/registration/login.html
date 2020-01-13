@@ -347,6 +347,7 @@ input[type=text]:placeholder {
             </button>
             <div class="sidebar mbr-white" data-app-modern-menu="true">
               {% if user.is_authenticated %}
+                <p class="text-primary display-7">{{ user.username }}님</p>
                 <a class="text-primary display-7" href="/account/logout/">로그아웃</a>
               {% else %}
                 <a class="text-primary display-7" href="/login/">로그인</a>

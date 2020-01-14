@@ -229,7 +229,7 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
       <div class="col-sm-3 imgUp">
         <div class="imagePreview"></div>
         <div class="custom-file">
-          <input type="file" id="profile-photo" name="image" accept="image/*" class="uploadFile custom-file-input" required>
+          <input type="file" id="profile-photo" name="image" accept="image/*" class="uploadFile custom-file-input" {% if not image %} required {% endif %}>
           <label class="custom-file-label" for="profile-photo">사진 선택</label>
         </div>
         <!-- <img src="/static/assets/images/anonymous.png" class="img-thumbnail" style="width: auto; height: auto;" /> -->

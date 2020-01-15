@@ -1,0 +1,30 @@
+server {
+        listen 443;
+        server_name kusitms-apply-21.tk;
+
+	ssl on;
+
+        location = /favicon.ico { access_log off; log_not_found off; }
+
+        location /static/ {
+                root /home/ubuntu/KUSITMS_21th_apply_server/server;
+        }
+
+        location / {
+                include proxy_params;
+                proxy_pass http://127.0.0.1:8000;
+        }
+
+    ssl_certificate /etc/letsencrypt/live/kusitms-apply-21.tk/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/kusitms-apply-21.tk/privkey.pem; # managed by Certbot
+}
+
+server {
+	listen       80;
+	server_name  kusitms-apply-21.tk;
+	if ($host = kusitms-apply-21.tk) {
+		return 301 https://$host$request_uri;
+	} # managed by Certbot
+
+}
+

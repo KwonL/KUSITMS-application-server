@@ -1,7 +1,7 @@
 from django.views.generic import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ApplicationForm
-from .models import ApplyForm
+from .models import ApplyForm, SNSImage
 from django.shortcuts import redirect, render
 from django.contrib import messages
 
@@ -32,6 +32,16 @@ class ApplyView(LoginRequiredMixin, FormView):
                 self.request.FILES.get('image')
             )
         apply.save()
+
+        # SNS 인증
+        if 'sns_image' in self.request.FILES:
+            for sns in self.request.FILES.get('sns_image'):
+                image = SNSImage.objects.create(application=apply)
+                image.image.save(
+                    self.request.FILES.get('sns_image').name,
+                    self.request.FILES.get('sns_image')
+                )
+
         messages.success(self.request, '지원이 접수되었습니다!')
 
         return redirect('/')

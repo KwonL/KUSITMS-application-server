@@ -29,6 +29,29 @@ def get_image_name(instance, filename):
     )
 
 
+def get_sns_image_name(instance, filename):
+    _, extension = os.path.splitext(filename)
+    date = datetime.strftime(timezone.now(), '%Y%m%d')
+    random = "{}{}".format(
+        date,
+        get_random_string(
+            length=6,
+            allowed_chars=str(
+                'abcdefghijklmnopqrstuvwxyz'
+                'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+            )
+        )
+    )
+    new_filename = '{random}{extension}'.format(
+        random=random,
+        extension=extension
+    )
+
+    return 'sns/{}'.format(
+        new_filename
+    )
+
+
 class ApplyForm(models.Model):
     image = models.ImageField(
         upload_to=get_image_name, null=False, blank=False,
@@ -88,3 +111,14 @@ class ApplyForm(models.Model):
     date_4_7 = models.BooleanField(default=False)
     mt_avail = models.CharField(max_length=10)
     ot_avail = models.CharField(max_length=10)
+
+
+class SNSImage(models.Model):
+    application = models.ForeignKey(
+        ApplyForm, on_delete=models.CASCADE, related_name='sns_images',
+        null=True, blank=True
+    )
+    image = models.ImageField(
+        upload_to=get_sns_image_name, null=False, blank=False,
+        default=''
+    )

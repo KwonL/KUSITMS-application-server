@@ -26,11 +26,6 @@ class ApplyView(LoginRequiredMixin, FormView):
             return redirect('/')
         apply.user = self.request.user
 
-        if not apply.image:
-            apply.image.save(
-                self.request.FILES.get('image').name,
-                self.request.FILES.get('image')
-            )
         apply.save()
 
         # SNS 인증

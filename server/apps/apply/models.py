@@ -54,8 +54,7 @@ def get_sns_image_name(instance, filename):
 
 class ApplyForm(models.Model):
     image = models.ImageField(
-        upload_to=get_image_name, null=False, blank=False,
-        default=''
+        upload_to=get_image_name
     )
     user = models.ForeignKey(
         'account.User', on_delete=models.SET_NULL, related_name='applications',

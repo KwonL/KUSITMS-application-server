@@ -35,11 +35,11 @@ class ApplyView(LoginRequiredMixin, FormView):
 
         # SNS 인증
         if 'sns_image' in self.request.FILES:
-            for sns in self.request.FILES.get('sns_image'):
+            for sns in self.request.FILES.getlist('sns_image'):
                 image = SNSImage.objects.create(application=apply)
                 image.image.save(
-                    self.request.FILES.get('sns_image').name,
-                    self.request.FILES.get('sns_image')
+                    sns.name,
+                    sns
                 )
 
         messages.success(self.request, '지원이 접수되었습니다!')

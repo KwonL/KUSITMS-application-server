@@ -1,9 +1,11 @@
-from django.views.generic import FormView
+from django.views.generic import FormView, ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ApplicationForm
 from .models import ApplyForm, SNSImage
 from django.shortcuts import redirect, render
 from django.contrib import messages
+from django.utils.decorators import method_decorator
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 class ApplyView(LoginRequiredMixin, FormView):
@@ -61,3 +63,19 @@ class ApplyView(LoginRequiredMixin, FormView):
             return res
         except Exception:
             return {}
+
+
+@method_decorator(
+    name='get', decorator=staff_member_required(login_url='/login/')
+)
+class ApplyListView(ListView):
+    model = ApplyForm
+    template_name = 'apply/list.html'
+
+
+@method_decorator(
+    name='get', decorator=staff_member_required(login_url='/login/')
+)
+class ApplyDetailView(DetailView):
+    model = ApplyForm
+    template_name = 'apply/scoring.html'

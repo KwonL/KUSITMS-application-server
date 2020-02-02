@@ -16,6 +16,9 @@ class LoginView(View):
         user = authenticate(request, email=email, password=password)
         if user:
             login(request, user)
+            redirect_url = request.GET.get('next')
+            if redirect_url:
+                return redirect(redirect_url)
             return redirect('/')
         else:
             return render(request, 'registration/login.html', {

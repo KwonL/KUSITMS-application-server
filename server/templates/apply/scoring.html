@@ -272,7 +272,7 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
               </div>
               <select class="form-control" id="sel1" name="gender">
                 <option>남성</option>
-                <option {% if gender == '여성' %} selected {% endif %}>여성</option>
+                <option {% if object.gender == '여성' %} selected {% endif %}>여성</option>
               </select>
             </div>
           </div>
@@ -349,11 +349,11 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
   </div>
   <div class="form-group">
     <p class="question-text"><b>5. 지금까지 했던 활동 / 하고있는 활동을 적어주세요.</b></p>
-    <input style="margin-bottom: 10px;" name="activity_1" type="text" value="{{ activity_1 }}" class="form-control" readonly>
-    <input style="margin-bottom: 10px;" name="activity_2" type="text" value="{{ activity_2 }}" class="form-control" readonly>
-    <input style="margin-bottom: 10px;" name="activity_3" type="text" value="{{ activity_3 }}" class="form-control" readonly>
-    <input style="margin-bottom: 10px;" name="activity_4" type="text" value="{{ activity_4 }}" class="form-control" readonly>
-    <input style="margin-bottom: 10px;" name="activity_5" type="text" value="{{ activity_5 }}" class="form-control" readonly>
+    <input style="margin-bottom: 10px;" name="activity_1" type="text" value="{{ object.activity_1 }}" class="form-control" readonly>
+    <input style="margin-bottom: 10px;" name="activity_2" type="text" value="{{ object.activity_2 }}" class="form-control" readonly>
+    <input style="margin-bottom: 10px;" name="activity_3" type="text" value="{{ object.activity_3 }}" class="form-control" readonly>
+    <input style="margin-bottom: 10px;" name="activity_4" type="text" value="{{ object.activity_4 }}" class="form-control" readonly>
+    <input style="margin-bottom: 10px;" name="activity_5" type="text" value="{{ object.activity_5 }}" class="form-control" readonly>
 
     <p class="question-text"><b>각 활동 내역에 대한 내용을 자세하게 서술해주세요. 칸이 부족하여 적지 못한 활동도 여기에 적어주세요.</b></p>
     <textarea class="form-control" name="answer_5" rows="10" placeholder="답변을 입력해주세요" readonly>{{ object.answer_5 }}</textarea>

@@ -79,3 +79,6 @@ class ApplyListView(ListView):
 class ApplyDetailView(DetailView):
     model = ApplyForm
     template_name = 'apply/scoring.html'
+
+    def get_queryset(self):
+        return super().get_queryset()

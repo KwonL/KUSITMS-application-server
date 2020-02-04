@@ -1,3 +1,8 @@
-from django.contrib import admin
+from django.contrib.admin.decorators import register
+from django.contrib.admin import ModelAdmin
+from apps.apply.models import ApplyForm
 
-# Register your models here.
+
+@register(ApplyForm)
+class ApplyFormAdmin(ModelAdmin):
+    pass

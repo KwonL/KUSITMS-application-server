@@ -44,7 +44,7 @@ class ApplyView(LoginRequiredMixin, FormView):
         return redirect('/')
 
     def form_invalid(self, form):
-        context = form.data
+        context = form.data.copy()
         context.update({
             'error_msg': '오류 발생. 오류가 지속되면 학회장에게 문의하세요.'
         })

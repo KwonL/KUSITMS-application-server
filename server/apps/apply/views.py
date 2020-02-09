@@ -70,6 +70,7 @@ class ApplyView(LoginRequiredMixin, FormView):
 )
 class ApplyListView(ListView):
     model = ApplyForm
+    ordering = ['name']
     template_name = 'apply/list.html'
 
 

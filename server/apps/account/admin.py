@@ -1,3 +1,8 @@
-from django.contrib import admin
+from django.contrib.admin.decorators import register
+from django.contrib.admin import ModelAdmin
+from apps.account.models import User
 
-# Register your models here.
+
+@register(User)
+class UserAdmin(ModelAdmin):
+    search_fields = ['name', 'email']

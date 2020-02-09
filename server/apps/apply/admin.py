@@ -5,7 +5,7 @@ from apps.apply.models import ApplyForm, SNSImage
 
 @register(ApplyForm)
 class ApplyFormAdmin(ModelAdmin):
-    pass
+    autocomplete_fields = ['user']
 
 
 @register(SNSImage)

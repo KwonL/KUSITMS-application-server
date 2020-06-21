@@ -4,6 +4,5 @@ services:
     build: .
     ports:
       - 8000:8000
-volumes:
-  static:
-    driver: local
+    volumes:
+      - ./data:/root/server/data

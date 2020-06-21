@@ -12,7 +12,7 @@ commands:
     desc: upload .env file
     upload:
       - src: ./server/.env
-        dst: $REPO_DIR/server/
+        dst: $REPO_DIR
   checkout:
     desc: setup repository
     run: cd $REPO_DIR && git checkout master && git pull origin master

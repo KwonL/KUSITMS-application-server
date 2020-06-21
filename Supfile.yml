@@ -3,12 +3,14 @@ networks:
     hosts:
       - ubuntu@54.180.163.198
 env:
-  COMPOSE_FILE: /home/ubuntu/KUSITMS-application-server/docker-compose.yml
+  REPO_DIR: /home/ubuntu/KUSITMS-application-server
+  COMPOSE_FILE: $REPO_DIR/docker-compose.yml
 commands:
   ping:
     run: uname -a
-  cd:
-    run: cd /home/ubuntu/KUSITMS-application-server
+  checkout:
+    desc: setup repository
+    run: cd $REPO_DIR && git checkout master && git pull origin master
   build:
     desc: Build image
     run: docker-compose -f $COMPOSE_FILE build
@@ -17,5 +19,6 @@ commands:
     run: docker-compose -f $COMPOSE_FILE up -d
 targets:
   deploy:
+    - checkout
     - build
     - update

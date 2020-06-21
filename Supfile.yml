@@ -8,6 +8,11 @@ env:
 commands:
   ping:
     run: uname -a
+  upload_env:
+    desc: upload .env file
+    upload:
+      - src: ./server/.env
+        dst: $REPO_DIR/server/
   checkout:
     desc: setup repository
     run: cd $REPO_DIR && git checkout master && git pull origin master
@@ -20,5 +25,6 @@ commands:
 targets:
   deploy:
     - checkout
+    - upload_env
     - build
     - update

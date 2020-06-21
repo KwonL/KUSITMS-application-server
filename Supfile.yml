@@ -1,0 +1,21 @@
+networks:
+  prod:
+    hosts:
+      - ubuntu@54.180.163.198
+env:
+  COMPOSE_FILE: /home/ubuntu/KUSITMS-application-server/docker-compose.yml
+commands:
+  ping:
+    run: uname -a
+  cd:
+    run: cd /home/ubuntu/KUSITMS-application-server
+  build:
+    desc: Build image
+    run: docker-compose -f $COMPOSE_FILE build
+  update:
+    desc: Update image
+    run: docker-compose -f $COMPOSE_FILE up -d
+targets:
+  deploy:
+    - build
+    - update

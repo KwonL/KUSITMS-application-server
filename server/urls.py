@@ -8,12 +8,12 @@ from django.conf import settings
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='index.html')),
-    path('login/', LoginView.as_view()),
-    path('signup/', SignupView.as_view()),
-    path('apply/', ApplyView.as_view()),
-    path('account/', include('django.contrib.auth.urls')),
-    path('list/', ApplyListView.as_view()),
-    path('list/<int:pk>/', ApplyDetailView.as_view())
+    path("admin/", admin.site.urls),
+    path("", TemplateView.as_view(template_name="index.html")),
+    path("login/", LoginView.as_view()),
+    path("signup/", SignupView.as_view()),
+    path("apply/", ApplyView.as_view()),
+    path("account/", include("django.contrib.auth.urls")),
+    path("list/", ApplyListView.as_view()),
+    path("list/<int:pk>/", ApplyDetailView.as_view()),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

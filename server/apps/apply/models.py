@@ -1,68 +1,47 @@
 import os
-from datetime import datetime
+import uuid
 
 from django.db import models
-from django.utils import timezone
-from django.utils.crypto import get_random_string
 
 
 def get_image_name(instance, filename):
     _, extension = os.path.splitext(filename)
-    date = datetime.strftime(timezone.now(), '%Y%m%d')
-    random = "{}{}".format(
-        date,
-        get_random_string(
-            length=6,
-            allowed_chars=str(
-                'abcdefghijklmnopqrstuvwxyz'
-                'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-            )
-        )
-    )
-    new_filename = '{random}{extension}'.format(
-        random=random,
-        extension=extension
-    )
-
-    return 'profile/{}'.format(
-        new_filename
-    )
+    return f"profile/{uuid.uuid4()}{extension}"
 
 
 def get_sns_image_name(instance, filename):
     _, extension = os.path.splitext(filename)
-    date = datetime.strftime(timezone.now(), '%Y%m%d')
-    random = "{}{}".format(
-        date,
-        get_random_string(
-            length=6,
-            allowed_chars=str(
-                'abcdefghijklmnopqrstuvwxyz'
-                'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-            )
-        )
-    )
-    new_filename = '{random}{extension}'.format(
-        random=random,
-        extension=extension
-    )
-
-    return 'sns/{}'.format(
-        new_filename
-    )
+    return f"sns/{uuid.uuid4()}{extension}"
 
 
 class ApplyForm(models.Model):
-    image = models.ImageField(
-        upload_to=get_image_name
+    MANAGEMENT, PUBLIC_RELATION, EDUCATION_PLANNING, MEMBER = (
+        "경영총괄팀",
+        "대외홍보팀",
+        "교육기획팀",
+        "학회원",
     )
+    APPLY_TYPE_CHOICES = [
+        (MANAGEMENT, "management"),
+        (PUBLIC_RELATION, "public relation"),
+        (EDUCATION_PLANNING, "education planning"),
+        (MEMBER, "member"),
+    ]
+
+    apply_type = models.CharField(
+        max_length=255, choices=APPLY_TYPE_CHOICES, default=MEMBER, blank=True
+    )
+    image = models.ImageField(upload_to=get_image_name)
     user = models.ForeignKey(
-        'account.User', on_delete=models.SET_NULL, related_name='applications',
-        null=True, blank=False
+        "account.User",
+        on_delete=models.SET_NULL,
+        related_name="applications",
+        null=True,
+        blank=False,
     )
     email = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=20)
     birth = models.DateField()
     phone = models.CharField(max_length=30)
@@ -114,10 +93,12 @@ class ApplyForm(models.Model):
 
 class SNSImage(models.Model):
     application = models.ForeignKey(
-        ApplyForm, on_delete=models.CASCADE, related_name='sns_images',
-        null=True, blank=True
+        ApplyForm,
+        on_delete=models.CASCADE,
+        related_name="sns_images",
+        null=True,
+        blank=True,
     )
     image = models.ImageField(
-        upload_to=get_sns_image_name, null=False, blank=False,
-        default=''
+        upload_to=get_sns_image_name, null=False, blank=False, default=""
     )

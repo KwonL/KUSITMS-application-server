@@ -43,7 +43,7 @@ class ApplyView(LoginRequiredMixin, FormView):
                 apply.name, apply.university, apply.apply_type
             )
 
-        messages.success(self.request, "지원이 수되었습니다!")
+        messages.success(self.request, "지원이 접수되었습니다!")
         return redirect("/")
 
     def form_invalid(self, form):

@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, FormView, ListView
 

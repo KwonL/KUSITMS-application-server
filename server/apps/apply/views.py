@@ -56,6 +56,7 @@ class ApplyView(LoginRequiredMixin, FormView):
             apply = ApplyForm.objects.filter(user=self.request.user)
             res = apply.values()[0]
             res.update({"image": apply[0].image})
+            res.update({"sns_images": apply[0].sns_images.all()})
         except Exception:
             pass
         if self.request.GET.get("application_type"):

@@ -5,11 +5,17 @@ networks:
     env:
       DJANGO_SETTINGS_MODULE: settings.prod
 env:
-  REPO_DIR: /home/ubuntu/KUSITMS-application-server
+  HOME_DIR: /home/ubuntu
+  REPO_DIR: $HOME_DIR/KUSITMS-application-server
   COMPOSE_FILE: $REPO_DIR/docker-compose.yml
 commands:
   ping:
     run: uname -a
+  upload:
+    desc: upload specified file
+    upload:
+      - src: $src
+        dst: $HOME_DIR/$dst
   upload_env:
     desc: upload .env file
     upload:

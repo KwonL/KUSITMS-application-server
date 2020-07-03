@@ -4,6 +4,10 @@ gunicorn==20.0.4
 django-extensions==2.2.8
 python-dotenv==0.13.0
 
+# Worker
+huey==2.2.0
+redis==3.5.3
+
 # Dev
 black==19.10b0
 flake8==3.7.9

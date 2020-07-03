@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_extensions",
+    "huey.contrib.djhuey",
     "apps.account",
     "apps.apply",
 ]
@@ -115,3 +116,36 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 AUTH_USER_MODEL = "account.User"
 LOGOUT_REDIRECT_URL = "/"
+
+# Mailing
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.getenv("GMAIL_USER")
+EMAIL_HOST_PASSWORD = os.getenv("GMAIL_PASSWORD")
+
+# Async worker
+HUEY = {
+    "huey_class": "huey.RedisHuey",
+    "name": DATABASES["default"]["NAME"],
+    "immediate": DEBUG,
+    "connection": {
+        "host": "broker",
+        "port": 6379,
+        "db": 0,
+        "connection_pool": None,
+        "read_timeout": 1,
+        "url": None,
+    },
+    "consumer": {
+        "workers": 3,
+        "worker_type": "thread",
+        "initial_delay": 0.1,
+        "backoff": 1.15,
+        "max_delay": 10.0,
+        "scheduler_interval": 1,
+        "periodic": True,
+        "check_worker_health": True,
+        "health_check_interval": 1,
+    },
+}

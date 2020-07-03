@@ -2,6 +2,8 @@ networks:
   prod:
     hosts:
       - ubuntu@54.180.163.198
+    env:
+      DJANGO_SETTINGS_MODULE: settings.prod
 env:
   REPO_DIR: /home/ubuntu/KUSITMS-application-server
   COMPOSE_FILE: $REPO_DIR/docker-compose.yml
@@ -22,6 +24,8 @@ commands:
   update:
     desc: Update image
     run: docker-compose -f $COMPOSE_FILE up -d
+  env:
+    run: env
 targets:
   deploy:
     - checkout

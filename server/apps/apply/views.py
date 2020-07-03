@@ -7,6 +7,7 @@ from django.views.generic import DetailView, FormView, ListView
 
 from .forms import ApplicationForm
 from .models import ApplyForm, SNSImage
+from .tasks import send_new_apply_notification
 
 
 class ApplyView(LoginRequiredMixin, FormView):
@@ -23,11 +24,12 @@ class ApplyView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         apply = form.save(commit=False)
+        is_new = False if apply.id else True
+
         if not apply.image:
             messages.error(self.request, "이미지를 업로드하세요")
             return redirect("/")
         apply.user = self.request.user
-
         apply.save()
 
         # SNS 인증
@@ -36,8 +38,12 @@ class ApplyView(LoginRequiredMixin, FormView):
                 image = SNSImage.objects.create(application=apply)
                 image.image.save(sns.name, sns)
 
-        messages.success(self.request, "지원이 접수되었습니다!")
+        if is_new:
+            send_new_apply_notification(
+                apply.name, apply.university, apply.apply_type
+            )
 
+        messages.success(self.request, "지원이 수되었습니다!")
         return redirect("/")
 
     def form_invalid(self, form):

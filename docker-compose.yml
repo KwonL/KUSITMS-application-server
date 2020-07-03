@@ -4,5 +4,22 @@ services:
     build: .
     ports:
       - 8000:8000
+    environment:
+      - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE:-settings.settings}
     volumes:
       - ./data:/root/server/data
+    networks:
+      - worker-net
+  broker:
+    image: redis
+    networks:
+      - worker-net
+  worker:
+    build: .
+    command: python manage.py run_huey
+    environment:
+      - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE:-settings.settings}
+    networks:
+      - worker-net
+networks:
+  worker-net:

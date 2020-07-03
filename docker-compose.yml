@@ -2,6 +2,7 @@ version: "3.8"
 services:
   web:
     build: .
+    image: kusitms-apply-web
     ports:
       - 8000:8000
     environment:
@@ -16,7 +17,7 @@ services:
     networks:
       - worker-net
   worker:
-    build: .
+    image: kusitms-apply-web
     command: python manage.py run_huey
     environment:
       - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE:-settings.settings}

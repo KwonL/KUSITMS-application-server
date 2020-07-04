@@ -2,8 +2,4 @@
 큐시즘 회원 지원을 위한 django 서버입니다.
 
 ## Deploy
-간단한 deploy이므로 sup를 사용합니다. 다음의 command를 통해 deploy 가능.
-
-```bash
-sup prod deploy
-```
+github action을 이용하여 deploy합니다. master에 push하면 자동으로 deploy

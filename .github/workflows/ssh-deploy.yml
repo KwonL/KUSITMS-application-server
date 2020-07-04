@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   deploy:
@@ -19,6 +19,7 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             cd KUSITMS-application-server
+            echo "${{ secrets.DOTENV }}" > server/.env
             git checkout master
             git pull origin master
             docker-compose build

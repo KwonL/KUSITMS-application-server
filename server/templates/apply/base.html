@@ -228,12 +228,11 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
         <p class="question-text" style="text-align: center; margin: 0% 15%; font-size: 16px;">
           <b style="font-size: 25px; color: red;"><유의사항></b> <br><br>
           1. ​제출된 지원서는 한국대학생IT경영학회 리쿠르팅 이외의 목적으로 사용되지 않음을 밝힙니다.<br><br>
-          2. 작성하고자 하는 내용이 많으시다면 분량 초과하셔도 괜찮습니다.<br><br>
-          3. <b style="color: blue;">반드시 크롬 브라우저로</b> 작성해주세요!<br><br>
-          4. 모바일 최적화가 되어 있지 않아, PC버전에서 작성해주시기 바랍니다.<br><br>
-          5. 문의 사항은 010-6765-4544 (부학회장 이재원)으로 연락 바랍니다.<br><br>
-          6. 재학 여부 및 학년은 참고 사항이며 합/불에 영향을 주지 않습니다.<br><br>
-          7. 코로나19 상황에 따라 MT는 취소될 수 있습니다.<br><br>
+          2. <b style="color: blue;">반드시 크롬 브라우저로</b> 작성해주세요!<br><br>
+          3. 모바일 최적화가 되어 있지 않아, PC버전에서 작성해주시기 바랍니다.<br><br>
+          4. 문의 사항은 010-4801-6061 (학회장 박세희)으로 연락 바랍니다.<br><br>
+          5. 재학 여부 및 학년은 참고 사항이며 합/불에 영향을 주지 않습니다.<br><br>
+          6. 코로나19 상황에 따라 MT는 취소될 수 있습니다.<br><br>
         </p>
       </div>
     </div>
@@ -408,16 +407,27 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
     {{ answer_5 }}</textarea
       >
     </div>
+
+    <div class="form-group">
+      <p class="question-text">
+        <b>
+          6. 큐시즘은 잘하는 사람이 아닌 열심히 꾸준히 활동할 수 있는 사람을 모집합니다. 
+          다음학기 일정에 대해서 상세하게 적어주세요. 그리고 이에 대한 각오나 다짐을 서술해주세요! 
+          (자유롭게 작성)
+        </b>
+      </p>
+      <textarea class="form-control" name="answer_4" rows="10" placeholder="답변을 입력해주세요" required>{{ answer_6 }}</textarea>
+    </div>    
     
     <div class="form-group">
-      <p class="question-text"><b>6. 가능하신 날짜에 모두 체크해주세요.</b></p>
+      <p class="question-text"><b>7. 가능하신 날짜에 모두 체크해주세요.</b></p>
       <fieldset>
         <div class='row'>
           <div class="col">
-            <div class="form-check">
+            <!-- <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_1_1" id="date_1_1" value="1" {% if date_1_1 %} checked {% endif %}>
               <label class="form-check-label small-question-text" for="date_1_1">7/25(토) 10AM~11AM</label>
-            </div>
+            </div> -->
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_1_2" id="date_1_2" value="1" {% if date_1_2 %} checked {% endif %}>
               <label class="form-check-label small-question-text" for="date_1_2">7/25(토) 12PM~13PM</label>
@@ -444,10 +454,10 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
             </div>
           </div>
           <div class="col">
-            <div class="form-check">
+            <!-- <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_2_1" id="date_2_1" value="1" {% if date_2_1 %} checked {% endif %}>
               <label class="form-check-label small-question-text" for="date_2_1">7/26(일) 10AM~11AM</label>
-            </div>
+            </div> -->
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_2_2" id="date_2_2" value="1" {% if date_2_2 %} checked {% endif %}>
               <label class="form-check-label small-question-text" for="date_2_2">7/26(일) 12PM~13PM</label>
@@ -538,26 +548,6 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
     </div>
     
     <div class="form-group">
-      <p class="question-text"><b>7. OT 참가여부를 선택해주세요. OT 날짜: 20.08.22.(토)</b></p>
-      <fieldset>
-        <div class='row'>
-          <div class="col-sm-3">
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text bg-white">참가여부</span>
-                </div>
-                <select class="form-control" id="sel1" name="ot_avail">
-                  <option>참석</option>
-                  <option  {% if ot_avail == '불참' %} selected {% endif %}>불참</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-      </fieldset>
-    </div>
-    <div class="form-group">
       <p class="question-text"><b>8. LT 참가여부를 선택해주세요. LT 날짜: 20.08.01.-02.(토-일)</b></p>
       <fieldset>
         <div class='row'>
@@ -578,7 +568,28 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
       </fieldset>
     </div>
     <div class="form-group">
-      <p class="question-text"><b>9. 페이스북 페이지 좋아요, 모집공고 게시물 좋아요 혹은 댓글,
+      <p class="question-text"><b>9. OT 참가여부를 선택해주세요. OT 날짜: 20.08.22.(토)</b></p>
+      <fieldset>
+        <div class='row'>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-white">참가여부</span>
+                </div>
+                <select class="form-control" id="sel1" name="ot_avail">
+                  <option>참석</option>
+                  <option  {% if ot_avail == '불참' %} selected {% endif %}>불참</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="form-group">
+      <p class="question-text"><b>10. 페이스북 페이지 좋아요, 모집공고 게시물 좋아요 혹은 댓글,
         인스타그램 팔로우/좋아요/댓글 등 완료 후 캡처하여
         지원서에 첨부하시면 가산점이 부여됩니다. (필수 아님)</b></p>
       <div class="custom-file">

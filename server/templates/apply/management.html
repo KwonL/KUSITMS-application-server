@@ -3,7 +3,11 @@
   <input type="hidden" name="apply_type" value="경영총괄팀" />
 
   <p class="question-text">
-    <b>1. 자기소개를 해주세요(지원 동기, 성격 등). (500자 이내)</b>
+    <b
+      >1. 경영총괄팀에 지원한 동기를 밝히고, 기획, 사무, 대관, 회계 네 가지 업무
+      중 어떤 분야를 맡고싶은지와 그 분야에서 능력 발휘를 어떻게 하실 것인지
+      말씀해주세요. (500자 내외)
+    </b>
   </p>
   <textarea
     class="form-control"
@@ -17,10 +21,7 @@
 </div>
 <div class="form-group">
   <p class="question-text">
-    <b
-      >2. IT나 경영 분야 중 가장 관심있는 분야에 대해 서술해주시고, 그를 위해
-      무슨 노력을 했는지 자세하게 서술해주세요. (500자 이내)</b
-    >
+    <b>2. 본인의 성격 및 장단점에 대해 말씀해주세요. (500자 내외) </b>
   </p>
   <textarea
     class="form-control"
@@ -35,8 +36,8 @@
 <div class="form-group">
   <p class="question-text">
     <b
-      >3. 본인이 큐시즘에서 얻어가고자 하는 것이 무엇인지 서술해주세요. (500자
-      이내)</b
+      >3. 지금까지 경험했던 협업 중에서 팀원들과 갈등이 있었던 상황과 갈등을
+      해소했던 방법을 말씀해주세요. (500자 내외)</b
     >
   </p>
   <textarea
@@ -51,7 +52,7 @@
 </div>
 <div class="form-group">
   <p class="question-text">
-    <b>4. 다음 학기 계획에 대해 서술해주세요. (500자 이내)</b>
+    <b>4. 마지막으로 하고싶은 말을 자유롭게 말씀해주세요. (500자 내외)</b>
   </p>
   <textarea
     class="form-control"
@@ -61,62 +62,6 @@
     required
   >
 {{ answer_4 }}</textarea
-  >
-</div>
-<div class="form-group">
-  <p class="question-text">
-    <b>5. 지금까지 했던 활동 / 하고있는 활동을 적어주세요.</b>
-  </p>
-  <input
-    style="margin-bottom: 10px;"
-    name="activity_1"
-    type="text"
-    value="{{ activity_1 }}"
-    class="form-control"
-  />
-  <input
-    style="margin-bottom: 10px;"
-    name="activity_2"
-    type="text"
-    value="{{ activity_2 }}"
-    class="form-control"
-  />
-  <input
-    style="margin-bottom: 10px;"
-    name="activity_3"
-    type="text"
-    value="{{ activity_3 }}"
-    class="form-control"
-  />
-  <input
-    style="margin-bottom: 10px;"
-    name="activity_4"
-    type="text"
-    value="{{ activity_4 }}"
-    class="form-control"
-  />
-  <input
-    style="margin-bottom: 10px;"
-    name="activity_5"
-    type="text"
-    value="{{ activity_5 }}"
-    class="form-control"
-  />
-
-  <p class="question-text">
-    <b
-      >각 활동 내역에 대한 내용을 자세하게 서술해주세요. 칸이 부족하여 적지 못한
-      활동도 여기에 적어주세요.</b
-    >
-  </p>
-  <textarea
-    class="form-control"
-    name="answer_5"
-    rows="10"
-    placeholder="답변을 입력해주세요"
-    required
-  >
-{{ answer_5 }}</textarea
   >
 </div>
 {% endblock %}

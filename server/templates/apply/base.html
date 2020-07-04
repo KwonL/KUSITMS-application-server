@@ -329,7 +329,7 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
             <div class="input-group-prepend">
               <span class="input-group-text bg-white"><i class="fa fa-university"></i></span>
             </div>
-            <input name="university" type="text" placeholder="소속대학/전공/재학여부(20학년도 1학기 기준) ex) 큐시즘대학교 큐시즘학과 3학년 재학" class="form-control border-left-0" value="{{ university }}" required>
+            <input name="university" type="text" placeholder="소속대학/전공/재학여부(20학년도 2학기 기준) ex) 큐시즘대학교 큐시즘학과 3학년 재학" class="form-control border-left-0" value="{{ university }}" required>
           </div>
         </div>
       </div>
@@ -352,6 +352,63 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
     {% block content %}
     {% endblock %}
 
+    <div class="form-group">
+      <p class="question-text">
+        <b>5. 지금까지 했던 활동 / 하고있는 활동을 적어주세요. (ex: 학과 활동, 동아리, 봉사, 수상내역, 인턴, 기타)</b>
+      </p>
+      <input
+        style="margin-bottom: 10px;"
+        name="activity_1"
+        type="text"
+        value="{{ activity_1 }}"
+        class="form-control"
+      />
+      <input
+        style="margin-bottom: 10px;"
+        name="activity_2"
+        type="text"
+        value="{{ activity_2 }}"
+        class="form-control"
+      />
+      <input
+        style="margin-bottom: 10px;"
+        name="activity_3"
+        type="text"
+        value="{{ activity_3 }}"
+        class="form-control"
+      />
+      <input
+        style="margin-bottom: 10px;"
+        name="activity_4"
+        type="text"
+        value="{{ activity_4 }}"
+        class="form-control"
+      />
+      <input
+        style="margin-bottom: 10px;"
+        name="activity_5"
+        type="text"
+        value="{{ activity_5 }}"
+        class="form-control"
+      />
+    
+      <p class="question-text">
+        <b
+          >각 활동 내역에 대한 내용을 자세하게 서술해주세요. 칸이 부족하여 적지 못한
+          활동도 여기에 적어주세요.</b
+        >
+      </p>
+      <textarea
+        class="form-control"
+        name="answer_5"
+        rows="10"
+        placeholder="답변을 입력해주세요"
+        required
+      >
+    {{ answer_5 }}</textarea
+      >
+    </div>
+    
     <div class="form-group">
       <p class="question-text"><b>6. 가능하신 날짜에 모두 체크해주세요.</b></p>
       <fieldset>
@@ -481,7 +538,7 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
     </div>
     
     <div class="form-group">
-      <p class="question-text"><b>7. OT 참가여부를 선택해주세요.</b></p>
+      <p class="question-text"><b>7. OT 참가여부를 선택해주세요. OT 날짜: 20.08.22.(토)</b></p>
       <fieldset>
         <div class='row'>
           <div class="col-sm-3">
@@ -501,7 +558,7 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
       </fieldset>
     </div>
     <div class="form-group">
-      <p class="question-text"><b>8. MT 참가여부를 선택해주세요.</b></p>
+      <p class="question-text"><b>8. LT 참가여부를 선택해주세요. LT 날짜: 20.08.01.-02.(토-일)</b></p>
       <fieldset>
         <div class='row'>
           <div class="col-sm-3">
@@ -521,7 +578,9 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
       </fieldset>
     </div>
     <div class="form-group">
-      <p class="question-text"><b>9. 큐시즘 SNS 좋아요, 팔로우 인증사진(필수 아님. 페이스북, 인스타 등에서 좋아요 또는 팔로우하신 사진 첨부하시면 가산점을 드립니다! 한 번에 여러 장 첨부 가능.)</b></p>
+      <p class="question-text"><b>9. 페이스북 페이지 좋아요, 모집공고 게시물 좋아요 혹은 댓글,
+        인스타그램 팔로우/좋아요/댓글 등 완료 후 캡처하여
+        지원서에 첨부하시면 가산점이 부여됩니다. (필수 아님)</b></p>
       <div class="custom-file">
         <input type="file" multiple name="sns_image" accept="image/*">
       </div>

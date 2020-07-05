@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -38,7 +39,7 @@ class ApplyView(LoginRequiredMixin, FormView):
                 image = SNSImage.objects.create(application=apply)
                 image.image.save(sns.name, sns)
 
-        if is_new:
+        if is_new and not settings.DEBUG:
             send_new_apply_notification(
                 apply.name, apply.university, apply.apply_type
             )
@@ -47,7 +48,8 @@ class ApplyView(LoginRequiredMixin, FormView):
         return redirect("/")
 
     def form_invalid(self, form):
-        messages.error("오류 발생. 오류가 지속되면 학회장에게 문의하세요.")
+        print(form.errors)
+        messages.error(self.request, "오류 발생. 오류가 지속되면 학회장에게 문의하세요.")
         return redirect("/")
 
     def get_context_data(self, **kwargs):

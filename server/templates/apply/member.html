@@ -10,7 +10,7 @@
     placeholder="답변을 입력해주세요"
     required
   >
-{{ answer_1 }}</textarea
+{{ object.answer_1 }}</textarea
   >
 </div>
 <div class="form-group">
@@ -27,7 +27,7 @@
     placeholder="답변을 입력해주세요"
     required
   >
-{{ answer_2 }}</textarea
+{{ object.answer_2 }}</textarea
   >
 </div>
 <div class="form-group">
@@ -44,7 +44,7 @@
     placeholder="답변을 입력해주세요"
     required
   >
-{{ answer_3 }}</textarea
+{{ object.answer_3 }}</textarea
   >
 </div>
 <div class="form-group">
@@ -58,63 +58,7 @@
     placeholder="답변을 입력해주세요"
     required
   >
-{{ answer_4 }}</textarea
-  >
-</div>
-<div class="form-group">
-  <p class="question-text">
-    <b>5. 지금까지 했던 활동 / 하고있는 활동을 적어주세요.</b>
-  </p>
-  <input
-    style="margin-bottom: 10px;"
-    name="activity_1"
-    type="text"
-    value="{{ activity_1 }}"
-    class="form-control"
-  />
-  <input
-    style="margin-bottom: 10px;"
-    name="activity_2"
-    type="text"
-    value="{{ activity_2 }}"
-    class="form-control"
-  />
-  <input
-    style="margin-bottom: 10px;"
-    name="activity_3"
-    type="text"
-    value="{{ activity_3 }}"
-    class="form-control"
-  />
-  <input
-    style="margin-bottom: 10px;"
-    name="activity_4"
-    type="text"
-    value="{{ activity_4 }}"
-    class="form-control"
-  />
-  <input
-    style="margin-bottom: 10px;"
-    name="activity_5"
-    type="text"
-    value="{{ activity_5 }}"
-    class="form-control"
-  />
-
-  <p class="question-text">
-    <b
-      >각 활동 내역에 대한 내용을 자세하게 서술해주세요. 칸이 부족하여 적지 못한
-      활동도 여기에 적어주세요.</b
-    >
-  </p>
-  <textarea
-    class="form-control"
-    name="answer_5"
-    rows="10"
-    placeholder="답변을 입력해주세요"
-    required
-  >
-{{ answer_5 }}</textarea
+{{ object.answer_4 }}</textarea
   >
 </div>
 {% endblock %}

@@ -54,15 +54,18 @@ class ApplyView(LoginRequiredMixin, FormView):
 
     def get_context_data(self, **kwargs):
         res = {"form": ApplicationForm()}
-        try:
-            apply = ApplyForm.objects.filter(user=self.request.user)
-            res = apply.values()[0]
-            res.update({"image": apply[0].image})
-            res.update({"sns_images": apply[0].sns_images.all()})
-        except Exception:
-            pass
+        apply = ApplyForm.objects.filter(user=self.request.user).first()
+        res = {"object": apply} if apply else {}
+
         if self.request.GET.get("application_type"):
-            res.update({"application_type": "운영진"})
+            res.update(
+                {
+                    "application_type": getattr(
+                        ApplyForm,
+                        self.request.GET.get("application_type").upper(),
+                    )
+                }
+            )
         return res
 
     def get_template_names(self):
@@ -87,4 +90,19 @@ class ApplyListView(ListView):
 )
 class ApplyDetailView(DetailView):
     model = ApplyForm
-    template_name = "apply/scoring.html"
+
+    def get_template_names(self):
+        obj = self.object
+        return "apply/{}".format(
+            {
+                ApplyForm.MANAGEMENT: "management.html",
+                ApplyForm.EDUCATION_PLANNING: "education_planning.html",
+                ApplyForm.PUBLIC_RELATION: "public_relation.html",
+                ApplyForm.MEMBER: "member.html",
+            }.get(obj.apply_type)
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({"application_type": "채점지", "scoring": True})
+        return context

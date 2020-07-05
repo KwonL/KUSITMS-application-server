@@ -223,6 +223,7 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
     {% csrf_token %}
     <p style="font-family: 'Malgun Gothic'; text-align: center; font-size: 50px;"><b>KUS<span style="color:#2B689C;">IT</span><span style="color:#259385;">M</span>S</span> {{ application_type|default:"회원" }} 지원서</b></p>
 
+    {% if not scoring %}
     <div class="form-group">
       <div class="row">
         <p class="question-text" style="text-align: center; margin: 0% 15%; font-size: 16px;">
@@ -237,6 +238,7 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
         </p>
       </div>
     </div>
+    {% endif %}
 
     <!-- 기본 프로필 -->
     <div class="form-group row align-items-center">

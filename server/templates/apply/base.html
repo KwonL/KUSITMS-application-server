@@ -364,6 +364,7 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
         type="text"
         value="{{ object.activity_1 }}"
         class="form-control"
+        {% if scoring %}readonly{% endif %}
       />
       <input
         style="margin-bottom: 10px;"
@@ -371,6 +372,7 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
         type="text"
         value="{{ object.activity_2 }}"
         class="form-control"
+        {% if scoring %}readonly{% endif %}
       />
       <input
         style="margin-bottom: 10px;"
@@ -378,6 +380,7 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
         type="text"
         value="{{ object.activity_3 }}"
         class="form-control"
+        {% if scoring %}readonly{% endif %}
       />
       <input
         style="margin-bottom: 10px;"
@@ -385,6 +388,7 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
         type="text"
         value="{{ object.activity_4 }}"
         class="form-control"
+        {% if scoring %}readonly{% endif %}
       />
       <input
         style="margin-bottom: 10px;"
@@ -392,6 +396,7 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
         type="text"
         value="{{ object.activity_5 }}"
         class="form-control"
+        {% if scoring %}readonly{% endif %}
       />
     
       <p class="question-text">
@@ -406,6 +411,7 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
         rows="10"
         placeholder="답변을 입력해주세요"
         required
+        {% if scoring %}readonly{% endif %}
       >
     {{ object.answer_5 }}</textarea
       >
@@ -419,7 +425,7 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
           (자유롭게 작성)
         </b>
       </p>
-      <textarea class="form-control" name="answer_6" rows="10" placeholder="답변을 입력해주세요" required>{{ object.answer_6 }}</textarea>
+      <textarea class="form-control" name="answer_6" rows="10" placeholder="답변을 입력해주세요" required {% if scoring %}readonly{% endif %}>{{ object.answer_6 }}</textarea>
     </div>    
     
     <div class="form-group">

@@ -14,6 +14,7 @@
     rows="10"
     placeholder="답변을 입력해주세요"
     required
+    {% if scoring %}readonly{% endif %}
   >
 {{ object.answer_1 }}</textarea
   >
@@ -28,6 +29,7 @@
     rows="10"
     placeholder="답변을 입력해주세요"
     required
+    {% if scoring %}readonly{% endif %}
   >
 {{ object.answer_2 }}</textarea
   >
@@ -47,6 +49,7 @@
     rows="10"
     placeholder="답변을 입력해주세요"
     required
+    {% if scoring %}readonly{% endif %}
   >
 {{ object.answer_3 }}</textarea
   >
@@ -65,6 +68,7 @@
     rows="10"
     placeholder="답변을 입력해주세요"
     required
+    {% if scoring %}readonly{% endif %}
   >
 {{ object.answer_4 }}</textarea
   >

@@ -16,6 +16,8 @@ server {
         proxy_pass http://127.0.0.1:8000;
     }
 
+    client_max_body_size 100M;
+
     listen 443 ssl; # managed by Certbot
     ssl_certificate /etc/letsencrypt/live/kusitms-apply.com/fullchain.pem; # managed by Certbot
     ssl_certificate_key /etc/letsencrypt/live/kusitms-apply.com/privkey.pem; # managed by Certbot

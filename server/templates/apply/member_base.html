@@ -432,7 +432,7 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
       >{{ object.answer_5 }}</textarea>
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <p class="question-text">
         <b>
           6. 큐시즘은 잘하는 사람이 아닌 열심히 꾸준히 활동할 수 있는 사람을 모집합니다. 
@@ -441,7 +441,8 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
         </b>
       </p>
       <textarea class="form-control" name="answer_6" rows="10" placeholder="답변을 입력해주세요" required {% if scoring %}readonly{% endif %}>{{ object.answer_6 }}</textarea>
-    </div>    
+    </div>     -->
+    <input hidden name="answer_6" value="no">
     
     <div class="form-group">
       <p class="question-text"><b>7. 가능하신 날짜에 모두 체크해주세요.</b></p>
@@ -450,149 +451,129 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
           <div class="col">
             <!-- <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_1_1" id="date_1_1" value="1" {% if object.date_1_1 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_1_1">7/25(토) 10AM~11AM</label>
+              <label class="form-check-label small-question-text" for="date_1_1">8/13(목) 10AM~11AM</label>
             </div> -->
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_1_2" id="date_1_2" value="1" {% if object.date_1_2 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_1_2">7/25(토) 12PM~13PM</label>
+              <label class="form-check-label small-question-text" for="date_1_2">8/13(목) 12PM~13PM</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_1_3" id="date_1_3" value="1" {% if object.date_1_3 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_1_3">7/25(토) 13PM~14PM</label>
+              <label class="form-check-label small-question-text" for="date_1_3">8/13(목) 13PM~14PM</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_1_4" id="date_1_4" value="1" {% if object.date_1_4 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_1_4">7/25(토) 14PM~15PM</label>
+              <label class="form-check-label small-question-text" for="date_1_4">8/13(목) 14PM~15PM</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_1_5" id="date_1_5" value="1" {% if object.date_1_5 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_1_5">7/25(토) 15PM~16PM</label>
+              <label class="form-check-label small-question-text" for="date_1_5">8/13(목) 15PM~16PM</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_1_6" id="date_1_6" value="1" {% if object.date_1_6 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_1_6">7/25(토) 16PM~17PM</label>
+              <label class="form-check-label small-question-text" for="date_1_6">8/13(목) 16PM~17PM</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_1_7" id="date_1_7" value="1" {% if object.date_1_7 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_1_7">7/25(토) 17PM~18PM</label>
+              <label class="form-check-label small-question-text" for="date_1_7">8/13(목) 17PM~18PM</label>
             </div>
           </div>
           <div class="col">
             <!-- <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_2_1" id="date_2_1" value="1" {% if object.date_2_1 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_2_1">7/26(일) 10AM~11AM</label>
+              <label class="form-check-label small-question-text" for="date_2_1">8/14(금) 10AM~11AM</label>
             </div> -->
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_2_2" id="date_2_2" value="1" {% if object.date_2_2 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_2_2">7/26(일) 12PM~13PM</label>
+              <label class="form-check-label small-question-text" for="date_2_2">8/14(금) 12PM~13PM</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_2_3" id="date_2_3" value="1" {% if object.date_2_3 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_2_3">7/26(일) 13PM~14PM</label>
+              <label class="form-check-label small-question-text" for="date_2_3">8/14(금) 13PM~14PM</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_2_4" id="date_2_4" value="1" {% if object.date_2_4 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_2_4">7/26(일) 14PM~15PM</label>
+              <label class="form-check-label small-question-text" for="date_2_4">8/14(금) 14PM~15PM</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_2_5" id="date_2_5" value="1" {% if object.date_2_5 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_2_5">7/26(일) 15PM~16PM</label>
+              <label class="form-check-label small-question-text" for="date_2_5">8/14(금) 15PM~16PM</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_2_6" id="date_2_6" value="1" {% if object.date_2_6 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_2_6">7/26(일) 16PM~17PM</label>
+              <label class="form-check-label small-question-text" for="date_2_6">8/14(금) 16PM~17PM</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_2_7" id="date_2_7" value="1" {% if object.date_2_7 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_2_7">7/26(일) 17PM~18PM</label>
-            </div>
-          </div>
-          <!-- <div class="col">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="date_3_1" id="date_3_1" value="1" {% if object.date_3_1 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_3_1">2/16(일) 10AM~11AM</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="date_3_2" id="date_3_2" value="1" {% if object.date_3_2 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_3_2">2/16(일) 11AM~12PM</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="date_3_3" id="date_3_3" value="1" {% if object.date_3_3 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_3_3">2/16(일) 12PM~13PM</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="date_3_4" id="date_3_4" value="1" {% if object.date_3_4 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_3_4">2/16(일) 13PM~14PM</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="date_3_5" id="date_3_5" value="1" {% if object.date_3_5 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_3_5">2/16(일) 14PM~15PM</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="date_3_6" id="date_3_6" value="1" {% if object.date_3_6 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_1_6">2/16(일) 16PM~17PM</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="date_3_7" id="date_3_7" value="1" {% if object.date_3_7 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_3_7">2/16(일) 17PM~18PM</label>
+              <label class="form-check-label small-question-text" for="date_2_7">8/14(금) 17PM~18PM</label>
             </div>
           </div>
           <div class="col">
+            <!-- <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="date_3_1" id="date_3_1" value="1" {% if object.date_3_1 %} checked {% endif %}>
+              <label class="form-check-label small-question-text" for="date_3_1">8/15(토) 10AM~11AM</label>
+            </div> -->
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="date_4_1" id="date_4_1" value="1" {% if object.date_4_1 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_4_1">2/17(월) 10AM~11AM</label>
+              <input class="form-check-input" type="checkbox" name="date_3_2" id="date_3_2" value="1" {% if object.date_3_2 %} checked {% endif %}>
+              <label class="form-check-label small-question-text" for="date_3_2">8/15(토) 11AM~12PM</label>
             </div>
             <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="date_3_3" id="date_3_3" value="1" {% if object.date_3_3 %} checked {% endif %}>
+              <label class="form-check-label small-question-text" for="date_3_3">8/15(토) 12PM~13PM</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="date_3_4" id="date_3_4" value="1" {% if object.date_3_4 %} checked {% endif %}>
+              <label class="form-check-label small-question-text" for="date_3_4">8/15(토) 13PM~14PM</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="date_3_5" id="date_3_5" value="1" {% if object.date_3_5 %} checked {% endif %}>
+              <label class="form-check-label small-question-text" for="date_3_5">8/15(토) 14PM~15PM</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="date_3_6" id="date_3_6" value="1" {% if object.date_3_6 %} checked {% endif %}>
+              <label class="form-check-label small-question-text" for="date_1_6">8/15(토) 16PM~17PM</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="date_3_7" id="date_3_7" value="1" {% if object.date_3_7 %} checked {% endif %}>
+              <label class="form-check-label small-question-text" for="date_3_7">8/15(토) 17PM~18PM</label>
+            </div>
+          </div>
+          <div class="col">
+            <!-- <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="date_4_1" id="date_4_1" value="1" {% if object.date_4_1 %} checked {% endif %}>
+              <label class="form-check-label small-question-text" for="date_4_1">8/16(일) 10AM~11AM</label>
+            </div> -->
+            <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_4_2" id="date_4_2" value="1" {% if object.date_4_2 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_4_2">2/17(월) 11AM~12PM</label>
+              <label class="form-check-label small-question-text" for="date_4_2">8/16(일) 11AM~12PM</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_4_3" id="date_4_3" value="1" {% if object.date_4_3 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_4_3">2/17(월) 12PM~13PM</label>
+              <label class="form-check-label small-question-text" for="date_4_3">8/16(일) 12PM~13PM</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_4_4" id="date_4_4" value="1" {% if object.date_4_4 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_4_4">2/17(월) 13PM~14PM</label>
+              <label class="form-check-label small-question-text" for="date_4_4">8/16(일) 13PM~14PM</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_4_5" id="date_4_5" value="1" {% if object.date_4_5 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_4_5">2/17(월) 14PM~15PM</label>
+              <label class="form-check-label small-question-text" for="date_4_5">8/16(일) 14PM~15PM</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_4_6" id="date_4_6" value="1" {% if object.date_4_6 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_4_6">2/17(월) 16PM~17PM</label>
+              <label class="form-check-label small-question-text" for="date_4_6">8/16(일) 16PM~17PM</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="date_4_7" id="date_4_7" value="1" {% if object.date_4_7 %} checked {% endif %}>
-              <label class="form-check-label small-question-text" for="date_4_7">2/17(월) 17PM~18PM</label>
+              <label class="form-check-label small-question-text" for="date_4_7">8/16(일) 17PM~18PM</label>
             </div>
-          </div> -->
+          </div>
         </div>
       </fieldset>
     </div>
     
     <div class="form-group">
-      <p class="question-text"><b>8. LT 참가여부를 선택해주세요. LT 날짜: 20.08.01.-02.(토-일)</b></p>
-      <fieldset>
-        <div class='row'>
-          <div class="col-sm-3">
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text bg-white">참가여부</span>
-                </div>
-                <select class="form-control" id="sel1" name="mt_avail">
-                  <option>참석</option>
-                  <option {% if object.mt_avail == '불참' %} selected {% endif %}>불참</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-      </fieldset>
-    </div>
-    <div class="form-group">
-      <p class="question-text"><b>9. OT 참가여부를 선택해주세요. OT 날짜: 20.08.22.(토)</b></p>
+      <p class="question-text"><b>8. OT 참가여부를 선택해주세요. OT 날짜: 20.08.22.(토)</b></p>
       <fieldset>
         <div class='row'>
           <div class="col-sm-3">
@@ -611,9 +592,30 @@ body{font-family: Roboto;}blockquote{border-color: #197bc6;}.display-1{font-fami
         </div>
       </fieldset>
     </div>
-
+    <!-- <div class="form-group">
+      <p class="question-text"><b>9. MT 참가여부를 선택해주세요. LT 날짜: 20.08.01.-02.(토-일)</b></p>
+      <fieldset>
+        <div class='row'>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-white">참가여부</span>
+                </div>
+                <select class="form-control" id="sel1" name="mt_avail">
+                  <option>참석</option>
+                  <option {% if object.mt_avail == '불참' %} selected {% endif %}>불참</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div> -->
+    <input hidden name="mt_avail" value="참석">
+    
     <div class="form-group">
-      <p class="question-text"><b>10. 페이스북 페이지 좋아요, 모집공고 게시물 좋아요 혹은 댓글,
+      <p class="question-text"><b>9. 페이스북 페이지 좋아요, 모집공고 게시물 좋아요 혹은 댓글,
         인스타그램 팔로우/좋아요/댓글 등 완료 후 캡처하여
         지원서에 첨부하시면 가산점이 부여됩니다. (필수 아님)</b></p>
       <div class="custom-file">

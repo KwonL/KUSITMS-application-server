@@ -48,6 +48,7 @@ class ApplyView(LoginRequiredMixin, FormView):
         return redirect("/")
 
     def form_invalid(self, form):
+        print(form.errors)
         messages.error(self.request, "오류 발생. 오류가 지속되면 학회장에게 문의하세요.")
         return redirect("/")
 
@@ -79,7 +80,16 @@ class ApplyView(LoginRequiredMixin, FormView):
     name="get", decorator=staff_member_required(login_url="/login/")
 )
 class ApplyListView(ListView):
-    model = ApplyForm
+    queryset = ApplyForm.objects.filter(apply_type="학회원").all()
+    ordering = ["name"]
+    template_name = "apply/list.html"
+
+
+@method_decorator(
+    name="get", decorator=staff_member_required(login_url="/login/")
+)
+class StaffApplyListView(ListView):
+    queryset = ApplyForm.objects.exclude(apply_type="학회원").all()
     ordering = ["name"]
     template_name = "apply/list.html"
 

@@ -1,6 +1,17 @@
-from django.contrib.admin.decorators import register
 from django.contrib.admin import ModelAdmin
-from apps.apply.models import ApplyForm, SNSImage
+from django.contrib.admin.decorators import register
+
+from apps.apply.models import ApplyForm, SNSImage, SiteConfig, ApplyConfig
+
+
+@register(SiteConfig)
+class SiteConfigAdmin(ModelAdmin):
+    pass
+
+
+@register(ApplyConfig)
+class ApplyConfigAdmin(ModelAdmin):
+    pass
 
 
 @register(ApplyForm)

@@ -4,11 +4,37 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
-from django.views.generic import DetailView, FormView, ListView
+from django.views.generic import DetailView, FormView, ListView, TemplateView
 
 from .forms import ApplicationForm
-from .models import ApplyForm, SNSImage
+from .models import ApplyForm, SNSImage, SiteConfig
 from .tasks import send_new_apply_notification
+
+
+class TitleView(TemplateView):
+    template_name = "index.html"
+    config = SiteConfig.objects.last()
+
+    def get_generation_str(self):
+        generation = str(self.config.generation)
+        if generation[-1] == "1":
+            return generation + "st"
+        elif generation[-1] == "2":
+            return generation + "nd"
+        elif generation[-1] == "3":
+            return generation + "rd"
+        else:
+            return generation + "th"
+
+    def get_context_data(self, **kwargs):
+        if self.config is None:
+            return dict()
+        print(self.get_generation_str())
+        return {
+            "generation_str": self.get_generation_str(),
+            "president": self.config.president,
+            "vice_president": self.config.vice_president,
+        }
 
 
 class ApplyView(LoginRequiredMixin, FormView):
@@ -40,9 +66,7 @@ class ApplyView(LoginRequiredMixin, FormView):
                 image.image.save(sns.name, sns)
 
         if is_new and not settings.DEBUG:
-            send_new_apply_notification(
-                apply.name, apply.university, apply.apply_type
-            )
+            send_new_apply_notification(apply.name, apply.university, apply.apply_type)
 
         messages.success(self.request, "지원이 접수되었습니다!")
         return redirect("/")
@@ -61,8 +85,7 @@ class ApplyView(LoginRequiredMixin, FormView):
             res.update(
                 {
                     "application_type": getattr(
-                        ApplyForm,
-                        self.request.GET.get("application_type").upper(),
+                        ApplyForm, self.request.GET.get("application_type").upper(),
                     )
                 }
             )
@@ -76,27 +99,14 @@ class ApplyView(LoginRequiredMixin, FormView):
         return "apply/member.html"
 
 
-@method_decorator(
-    name="get", decorator=staff_member_required(login_url="/login/")
-)
+@method_decorator(name="get", decorator=staff_member_required(login_url="/login/"))
 class ApplyListView(ListView):
-    queryset = ApplyForm.objects.filter(apply_type="학회원").all()
+    queryset = ApplyForm.objects.all()
     ordering = ["name"]
     template_name = "apply/list.html"
 
 
-@method_decorator(
-    name="get", decorator=staff_member_required(login_url="/login/")
-)
-class StaffApplyListView(ListView):
-    queryset = ApplyForm.objects.exclude(apply_type="학회원").all()
-    ordering = ["name"]
-    template_name = "apply/list.html"
-
-
-@method_decorator(
-    name="get", decorator=staff_member_required(login_url="/login/")
-)
+@method_decorator(name="get", decorator=staff_member_required(login_url="/login/"))
 class ApplyDetailView(DetailView):
     model = ApplyForm
 

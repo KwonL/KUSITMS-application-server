@@ -14,22 +14,33 @@ def get_sns_image_name(instance, filename):
     return f"sns/{uuid.uuid4()}{extension}"
 
 
-class ApplyForm(models.Model):
-    MANAGEMENT, PUBLIC_RELATION, EDUCATION_PLANNING, MEMBER = (
-        "경영총괄팀",
-        "대외홍보팀",
-        "교육기획팀",
-        "학회원",
-    )
-    APPLY_TYPE_CHOICES = [
-        (MANAGEMENT, "management"),
-        (PUBLIC_RELATION, "public relation"),
-        (EDUCATION_PLANNING, "education planning"),
-        (MEMBER, "member"),
-    ]
+class SiteConfig(models.Model):
+    generation = models.IntegerField("기수", default=0)
+    president = models.CharField("학회장 이름 (전화번호)", max_length=100, default="")
+    vice_president = models.CharField("부학회장 이름 (전화번호)", max_length=100, default="")
+    start = models.DateTimeField("지원 시작일")
+    end = models.DateTimeField("지원 종료일")
+    ot_date = models.DateField("OT 날짜")
+    mt_date = models.DateField("MT 날짜")
 
-    apply_type = models.CharField(
-        max_length=255, choices=APPLY_TYPE_CHOICES, default=MEMBER, blank=True
+
+class ApplyConfig(models.Model):
+    name = models.CharField("지원서 타입(학회원, 경총, 대홍..)", max_length=255, default="학회원")
+    is_active = models.BooleanField("활성화 여부", default=True)
+    notice = models.TextField("유의사항", default="", blank=True)
+    question_1 = models.TextField("질문 1", default="")
+    question_2 = models.TextField("질문 2", default="")
+    question_3 = models.TextField("질문 3", default="")
+    question_4 = models.TextField("질문 4", default="")
+    question_5 = models.TextField("질문 5(활동 내역)", default="")
+    question_6 = models.TextField("질문 6(자유롭게 하고싶은 말)", default="")
+    interview_start = models.DateTimeField("면접 시작일과 시간(한시간 단위로 설정됨)")
+    interview_end = models.DateTimeField("면접 종료일과 시간(한시간 단위로 설정됨)")
+
+
+class ApplyForm(models.Model):
+    apply_type = models.ForeignKey(
+        ApplyConfig, on_delete=models.SET_NULL, related_name="applications", null=True
     )
     image = models.ImageField(upload_to=get_image_name)
     user = models.ForeignKey(
@@ -60,34 +71,7 @@ class ApplyForm(models.Model):
     activity_3 = models.CharField(max_length=255, blank=True)
     activity_4 = models.CharField(max_length=255, blank=True)
     activity_5 = models.CharField(max_length=255, blank=True)
-    date_1_1 = models.BooleanField(default=False)
-    date_1_2 = models.BooleanField(default=False)
-    date_1_3 = models.BooleanField(default=False)
-    date_1_4 = models.BooleanField(default=False)
-    date_1_5 = models.BooleanField(default=False)
-    date_1_6 = models.BooleanField(default=False)
-    date_1_7 = models.BooleanField(default=False)
-    date_2_1 = models.BooleanField(default=False)
-    date_2_2 = models.BooleanField(default=False)
-    date_2_3 = models.BooleanField(default=False)
-    date_2_4 = models.BooleanField(default=False)
-    date_2_5 = models.BooleanField(default=False)
-    date_2_6 = models.BooleanField(default=False)
-    date_2_7 = models.BooleanField(default=False)
-    date_3_1 = models.BooleanField(default=False)
-    date_3_2 = models.BooleanField(default=False)
-    date_3_3 = models.BooleanField(default=False)
-    date_3_4 = models.BooleanField(default=False)
-    date_3_5 = models.BooleanField(default=False)
-    date_3_6 = models.BooleanField(default=False)
-    date_3_7 = models.BooleanField(default=False)
-    date_4_1 = models.BooleanField(default=False)
-    date_4_2 = models.BooleanField(default=False)
-    date_4_3 = models.BooleanField(default=False)
-    date_4_4 = models.BooleanField(default=False)
-    date_4_5 = models.BooleanField(default=False)
-    date_4_6 = models.BooleanField(default=False)
-    date_4_7 = models.BooleanField(default=False)
+    interview_date = models.TextField(default="")
     mt_avail = models.CharField(max_length=10)
     ot_avail = models.CharField(max_length=10)
 

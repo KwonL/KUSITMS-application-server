@@ -14,7 +14,7 @@ urlpatterns = [
     path("signup/", account_views.SignupView.as_view()),
     path("account/", include("django.contrib.auth.urls")),
     # apply
-    path("apply/", apply_views.ApplyView.as_view()),
+    path("apply/<int:apply_type>/", apply_views.ApplyView.as_view()),
     # scoring
     path("list/", apply_views.ApplyListView.as_view()),
     path("list/<int:pk>/", apply_views.ApplyDetailView.as_view()),

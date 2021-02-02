@@ -71,9 +71,7 @@ class ApplyForm(models.Model):
     activity_3 = models.CharField(max_length=255, blank=True)
     activity_4 = models.CharField(max_length=255, blank=True)
     activity_5 = models.CharField(max_length=255, blank=True)
-    interview_date = models.TextField(default="")
-    mt_avail = models.CharField(max_length=10)
-    ot_avail = models.CharField(max_length=10)
+    interview_date = models.TextField(default="", blank=True)
 
 
 class SNSImage(models.Model):

@@ -1,3 +1,6 @@
+import locale
+from datetime import timedelta, datetime
+
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
@@ -7,7 +10,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, FormView, ListView, TemplateView
 
 from .forms import ApplicationForm
-from .models import ApplyForm, SNSImage, SiteConfig
+from .models import ApplyForm, SNSImage, SiteConfig, ApplyConfig
 from .tasks import send_new_apply_notification
 
 
@@ -29,24 +32,55 @@ class TitleView(TemplateView):
     def get_context_data(self, **kwargs):
         if self.config is None:
             return dict()
-        print(self.get_generation_str())
+        apply_configs = list(
+            ApplyConfig.objects.filter(is_active=True).values_list("id", "name")
+        )
         return {
             "generation_str": self.get_generation_str(),
             "president": self.config.president,
             "vice_president": self.config.vice_president,
+            "apply_types": apply_configs,
         }
+
+
+def get_interview_date_list(apply_config):
+    interview_date_list = list()
+    day_list = list()
+    locale.setlocale(locale.LC_ALL, "ko_KR.UTF-8")
+    start_time = apply_config.interview_start + timedelta(hours=9)
+    end_time = apply_config.interview_end + timedelta(hours=9)
+    start_hour = start_time.hour
+    day_delta = timedelta(days=1)
+    hour_delta = timedelta(hours=1)
+
+    while start_time <= end_time:
+        day_list.append(
+            start_time.strftime("%m/%d(%a) %H%p~")
+            + (start_time + hour_delta).strftime("%H%p")
+        )
+        start_time += hour_delta
+        if start_time.hour == end_time.hour:
+            start_time += day_delta
+            start_time = start_time.replace(hour=start_hour)
+            interview_date_list.append(day_list)
+            day_list = list()
+    return interview_date_list
 
 
 class ApplyView(LoginRequiredMixin, FormView):
     login_url = "/login/"
     form_class = ApplicationForm
     success_url = "/"
+    template_name = "apply/application.html"
 
-    def get_form(self):
-        try:
-            apply = ApplyForm.objects.get(user=self.request.user)
+    def get_form(self, **kwargs):
+        apply = ApplyForm.objects.filter(
+            user=self.request.user,
+            apply_type_id=self.request.resolver_match.kwargs.get("apply_type"),
+        ).first()
+        if apply:
             return self.form_class(instance=apply, **self.get_form_kwargs())
-        except ApplyForm.DoesNotExist:
+        else:
             return self.form_class(**self.get_form_kwargs())
 
     def form_valid(self, form):
@@ -77,26 +111,22 @@ class ApplyView(LoginRequiredMixin, FormView):
         return redirect("/")
 
     def get_context_data(self, **kwargs):
-        res = {"form": ApplicationForm()}
-        apply = ApplyForm.objects.filter(user=self.request.user).first()
-        res = {"object": apply} if apply else {}
+        apply = ApplyForm.objects.filter(
+            user=self.request.user,
+            apply_type_id=self.request.resolver_match.kwargs.get("apply_type"),
+        ).first()
+        apply_config = ApplyConfig.objects.get(
+            id=self.request.resolver_match.kwargs.get("apply_type")
+        )
+        interview_date_list = get_interview_date_list(apply_config)
 
-        if self.request.GET.get("application_type"):
-            res.update(
-                {
-                    "application_type": getattr(
-                        ApplyForm, self.request.GET.get("application_type").upper(),
-                    )
-                }
-            )
-        return res
-
-    def get_template_names(self):
-        app_type = self.request.GET.get("application_type")
-
-        if app_type:
-            return f"apply/{app_type}.html"
-        return "apply/member.html"
+        return {
+            "object": apply,
+            "apply_config": apply_config,
+            "interview_date_list": interview_date_list,
+            "interview_list_len_1": len(interview_date_list),
+            "interview_list_len_2": len(interview_date_list[0]),
+        }
 
 
 @method_decorator(name="get", decorator=staff_member_required(login_url="/login/"))
@@ -111,17 +141,18 @@ class ApplyDetailView(DetailView):
     model = ApplyForm
 
     def get_template_names(self):
-        obj = self.object
-        return "apply/{}".format(
-            {
-                ApplyForm.MANAGEMENT: "management.html",
-                ApplyForm.EDUCATION_PLANNING: "education_planning.html",
-                ApplyForm.PUBLIC_RELATION: "public_relation.html",
-                ApplyForm.MEMBER: "member.html",
-            }.get(obj.apply_type)
-        )
+        return "apply/application.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update({"application_type": "채점지", "scoring": True})
+        interview_date_list = get_interview_date_list(self.object.apply_type)
+        context.update(
+            {
+                "scoring": True,
+                "apply_config": self.object.apply_type,
+                "interview_date_list": interview_date_list,
+                "interview_list_len_1": len(interview_date_list),
+                "interview_list_len_2": len(interview_date_list[0]),
+            }
+        )
         return context

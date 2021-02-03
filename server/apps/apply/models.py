@@ -14,14 +14,45 @@ def get_sns_image_name(instance, filename):
     return f"sns/{uuid.uuid4()}{extension}"
 
 
+def get_main_image_name(instance, filename):
+    _, extension = os.path.splitext(filename)
+    return f"title/{uuid.uuid4()}{extension}"
+
+
+def get_main_slide_name(instance, filename):
+    _, extension = os.path.splitext(filename)
+    return f"main-slide/{uuid.uuid4()}{extension}"
+
+
 class SiteConfig(models.Model):
     generation = models.IntegerField("기수", default=0)
+    main_image = models.ImageField(
+        upload_to=get_main_image_name, null=False, blank=False, default=""
+    )
     president = models.CharField("학회장 이름 (전화번호)", max_length=100, default="")
     vice_president = models.CharField("부학회장 이름 (전화번호)", max_length=100, default="")
     start = models.DateTimeField("지원 시작일")
     end = models.DateTimeField("지원 종료일")
     ot_date = models.DateField("OT 날짜")
     mt_date = models.DateField("MT 날짜")
+    is_active = models.BooleanField("활성화 여부", default=True)
+    recruitment_summary = models.URLField("모집 요강 URL", default="", blank=True)
+
+    class Meta:
+        db_table = "site_config"
+
+
+class MainSlideImage(models.Model):
+    site_config = models.ForeignKey(
+        SiteConfig,
+        on_delete=models.SET_NULL,
+        related_name="main_slides",
+        null=True,
+        blank=True,
+    )
+    image = models.ImageField(
+        upload_to=get_main_slide_name, null=False, blank=False, default=""
+    )
 
 
 class ApplyConfig(models.Model):
@@ -36,6 +67,9 @@ class ApplyConfig(models.Model):
     question_6 = models.TextField("질문 6(자유롭게 하고싶은 말)", default="")
     interview_start = models.DateTimeField("면접 시작일과 시간(한시간 단위로 설정됨)")
     interview_end = models.DateTimeField("면접 종료일과 시간(한시간 단위로 설정됨)")
+
+    class Meta:
+        db_table = "apply_config"
 
 
 class ApplyForm(models.Model):

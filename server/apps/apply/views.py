@@ -1,5 +1,5 @@
 import locale
-from datetime import timedelta, datetime
+from datetime import timedelta
 
 from django.conf import settings
 from django.contrib import messages
@@ -16,10 +16,9 @@ from .tasks import send_new_apply_notification
 
 class TitleView(TemplateView):
     template_name = "index.html"
-    config = SiteConfig.objects.last()
 
-    def get_generation_str(self):
-        generation = str(self.config.generation)
+    def get_generation_str(self, config):
+        generation = str(config.generation)
         if generation[-1] == "1":
             return generation + "st"
         elif generation[-1] == "2":
@@ -30,15 +29,19 @@ class TitleView(TemplateView):
             return generation + "th"
 
     def get_context_data(self, **kwargs):
-        if self.config is None:
+        config = (
+            SiteConfig.objects.prefetch_related("main_slides")
+            .filter(is_active=True)
+            .last()
+        )
+        if config is None:
             return dict()
         apply_configs = list(
             ApplyConfig.objects.filter(is_active=True).values_list("id", "name")
         )
         return {
-            "generation_str": self.get_generation_str(),
-            "president": self.config.president,
-            "vice_president": self.config.vice_president,
+            "generation_str": self.get_generation_str(config),
+            "site_config": config,
             "apply_types": apply_configs,
         }
 

@@ -2109,7 +2109,7 @@
         <div class="imagePreview"></div>
         <div class="custom-file">
           <input type="file" id="profile-photo" name="image" accept="image/*" class="uploadFile custom-file-input"
-              {% if not object.image %} required {% endif %}>
+              {% if not object.image %} required {% endif %} {% if scoring %}disabled{% endif %}>
           <label class="custom-file-label" for="profile-photo">사진 선택</label>
         </div>
         <!-- <img src="/static/assets/images/anonymous.png" class="img-thumbnail" style="width: auto; height: auto;" /> -->
@@ -2123,7 +2123,7 @@
                   <span class="input-group-text bg-white"><i class="fa fa-id-badge"></i></span>
                 </div>
                 <input name="name" type="text" placeholder="이름을 입력해주세요" class="form-control border-left-0"
-                       value="{{ object.name }}" required>
+                       value="{{ object.name }}" required {% if scoring %}disabled{% endif %}>
               </div>
             </div>
           </div>
@@ -2134,7 +2134,7 @@
                   <span class="input-group-text bg-white"><i class="fa fa-birthday-cake"> 생년월일 </i></span>
                 </div>
                 <input name="birth" type="date" class="form-control border-left-0"
-                       value="{{ object.birth|date:'Y-m-d' }}" required>
+                       value="{{ object.birth|date:'Y-m-d' }}" required {% if scoring %}disabled{% endif %}>
               </div>
             </div>
           </div>
@@ -2147,7 +2147,7 @@
                   <span class="input-group-text bg-white"><i class="fa fa-phone"></i></span>
                 </div>
                 <input name="phone" type="phone" placeholder="010-xxxx-xxxx" class="form-control border-left-0"
-                       value="{{ object.phone }}" required>
+                       value="{{ object.phone }}" required {% if scoring %}disabled{% endif %}>
               </div>
             </div>
           </div>
@@ -2157,7 +2157,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text bg-white"><i class="fa fa-transgender"> 성별 </i></span>
                 </div>
-                <select class="form-control" id="sel1" name="gender">
+                <select class="form-control" id="sel1" name="gender" {% if scoring %}disabled{% endif %}>
                   <option>남성</option>
                   <option {% if object.gender == '여성' %} selected {% endif %}>여성</option>
                 </select>
@@ -2173,7 +2173,7 @@
                   <span class="input-group-text bg-white"><i class="fa fa-instagram"></i></span>
                 </div>
                 <input name="insta" type="text" placeholder="인스타그램 ID" class="form-control border-left-0"
-                       value="{{ object.insta }}" required>
+                       value="{{ object.insta }}" required {% if scoring %}disabled{% endif %}>
               </div>
             </div>
           </div>
@@ -2184,7 +2184,7 @@
                   <span class="input-group-text bg-white"><i class="fa fa-envelope"></i></span>
                 </div>
                 <input name="email" type="email" placeholder="Email" class="form-control border-left-0"
-                       value="{{ object.email }}" required>
+                       value="{{ object.email }}" required {% if scoring %}disabled{% endif %}>
               </div>
             </div>
           </div>
@@ -2201,7 +2201,7 @@
               <span class="input-group-text bg-white"><i class="fa fa-university"></i></span>
             </div>
             <input name="university" type="text" placeholder="소속대학/전공/재학여부(20학년도 2학기 기준) ex) 큐시즘대학교 큐시즘학과 3학년 재학"
-                   class="form-control border-left-0" value="{{ object.university }}" required>
+                   class="form-control border-left-0" value="{{ object.university }}" required {% if scoring %}disabled{% endif %}>
           </div>
         </div>
       </div>
@@ -2215,7 +2215,7 @@
               <span class="input-group-text bg-white"><i class="fa fa-home"></i></span>
             </div>
             <input name="address" type="text" placeholder="현 거주지" class="form-control border-left-0"
-                   value="{{ object.address }}" required>
+                   value="{{ object.address }}" required {% if scoring %}disabled{% endif %}>
           </div>
         </div>
       </div>

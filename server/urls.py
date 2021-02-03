@@ -16,8 +16,8 @@ urlpatterns = [
     # apply
     path("apply/<int:apply_type>/", apply_views.ApplyView.as_view()),
     # scoring
-    path("list/", apply_views.ApplyListView.as_view()),
-    path("list/<int:pk>/", apply_views.ApplyDetailView.as_view()),
+    path("internal/list/", apply_views.ApplyListView.as_view()),
+    path("internal/list/<int:pk>/", apply_views.ApplyDetailView.as_view()),
 ]
 
 if settings.DEBUG:

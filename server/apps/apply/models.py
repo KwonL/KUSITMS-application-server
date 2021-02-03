@@ -3,6 +3,8 @@ import uuid
 
 from django.db import models
 
+from utils.const import NOTICE_DEFAULT_STRING, QUESTION_5_DEFAULT, QUESTION_6_DEFAULT
+
 
 def get_image_name(instance, filename):
     _, extension = os.path.splitext(filename)
@@ -40,6 +42,8 @@ class SiteConfig(models.Model):
 
     class Meta:
         db_table = "site_config"
+        verbose_name = "사이트 설정(기수, 지원일 등)"
+        verbose_name_plural = "사이트 설정(기수, 지원일 등)"
 
 
 class MainSlideImage(models.Model):
@@ -56,20 +60,22 @@ class MainSlideImage(models.Model):
 
 
 class ApplyConfig(models.Model):
-    name = models.CharField("지원서 타입(학회원, 경총, 대홍..)", max_length=255, default="학회원")
+    name = models.CharField("지원서 타입(학회원, 경총, 대홍..)", max_length=255, default="21기 학회원")
     is_active = models.BooleanField("활성화 여부", default=True)
-    notice = models.TextField("유의사항", default="", blank=True)
-    question_1 = models.TextField("질문 1", default="")
-    question_2 = models.TextField("질문 2", default="")
-    question_3 = models.TextField("질문 3", default="")
-    question_4 = models.TextField("질문 4", default="")
-    question_5 = models.TextField("질문 5(활동 내역)", default="")
-    question_6 = models.TextField("질문 6(자유롭게 하고싶은 말)", default="")
+    notice = models.TextField("유의사항", default=NOTICE_DEFAULT_STRING, blank=True)
+    question_1 = models.TextField("질문 1", default="1번 질문")
+    question_2 = models.TextField("질문 2", default="2번 질문")
+    question_3 = models.TextField("질문 3", default="3번 질문")
+    question_4 = models.TextField("질문 4", default="4번 질문")
+    question_5 = models.TextField("질문 5(활동 내역)", default=QUESTION_5_DEFAULT)
+    question_6 = models.TextField("질문 6(자유롭게 하고싶은 말)", default=QUESTION_6_DEFAULT)
     interview_start = models.DateTimeField("면접 시작일과 시간(한시간 단위로 설정됨)")
     interview_end = models.DateTimeField("면접 종료일과 시간(한시간 단위로 설정됨)")
 
     class Meta:
         db_table = "apply_config"
+        verbose_name = "지원서 개별 설정"
+        verbose_name_plural = "지원서 개별 설정"
 
 
 class ApplyForm(models.Model):
@@ -106,6 +112,10 @@ class ApplyForm(models.Model):
     activity_4 = models.CharField(max_length=255, blank=True)
     activity_5 = models.CharField(max_length=255, blank=True)
     interview_date = models.TextField(default="", blank=True)
+
+    class Meta:
+        verbose_name = "지원서"
+        verbose_name_plural = "지원서"
 
 
 class SNSImage(models.Model):

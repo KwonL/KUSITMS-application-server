@@ -90,6 +90,11 @@ class ApplyView(LoginRequiredMixin, FormView):
         apply = form.save(commit=False)
         is_new = False if apply.id else True
 
+        # 지원서 마감
+        if not apply.apply_type.is_active:
+            messages.error(self.request, "접수가 마감되었습니다. 더이상 지원하실 수 없습니다.")
+            return redirect("/")
+
         if not apply.image:
             messages.error(self.request, "이미지를 업로드하세요")
             return redirect("/")
@@ -134,7 +139,7 @@ class ApplyView(LoginRequiredMixin, FormView):
 
 @method_decorator(name="get", decorator=staff_member_required(login_url="/login/"))
 class ApplyListView(ListView):
-    queryset = ApplyForm.objects.all()
+    queryset = ApplyForm.objects.filter(apply_type__is_active=True)
     ordering = ["name"]
     template_name = "apply/list.html"
 

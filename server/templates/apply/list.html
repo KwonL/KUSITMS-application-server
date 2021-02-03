@@ -3,7 +3,7 @@
   {% for form in object_list %}
   <a href="/list/{{ form.id }}/" >
     <li>
-      {{ forloop.counter }}. {{ form.name }} - {{ form.university }} - {{ form.apply_type }}
+      {{ forloop.counter }}. {{ form.name }} - {{ form.university }} - {{ form.apply_type.name }}
     </li>
   </a>
   {% empty %}

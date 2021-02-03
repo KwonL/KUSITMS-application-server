@@ -18,6 +18,7 @@ class SlideInline(StackedInline):
 @register(SiteConfig)
 class SiteConfigAdmin(ModelAdmin):
     inlines = [SlideInline]
+    list_display = ["generation", "president", "vice_president"]
 
     def save_related(self, request, form, formsets, change):
         print(form)
@@ -27,12 +28,13 @@ class SiteConfigAdmin(ModelAdmin):
 
 @register(ApplyConfig)
 class ApplyConfigAdmin(ModelAdmin):
-    pass
+    list_display = ["name", "is_active"]
 
 
 @register(ApplyForm)
 class ApplyFormAdmin(ModelAdmin):
     autocomplete_fields = ["user"]
+    list_display = ["name", "university", "birth"]
 
 
 @register(SNSImage)

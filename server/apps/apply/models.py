@@ -129,3 +129,12 @@ class SNSImage(models.Model):
     image = models.ImageField(
         upload_to=get_sns_image_name, null=False, blank=False, default=""
     )
+
+
+class MailList(models.Model):
+    name = models.CharField("이름", max_length=255, blank=True, default="")
+    email = models.EmailField("이메일")
+
+    class Meta:
+        verbose_name = "이메일 리스트"
+        verbose_name_plural = "이메일 리스트"

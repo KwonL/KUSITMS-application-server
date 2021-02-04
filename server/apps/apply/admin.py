@@ -7,6 +7,7 @@ from apps.apply.models import (
     SiteConfig,
     ApplyConfig,
     MainSlideImage,
+    MailList,
 )
 
 
@@ -19,11 +20,6 @@ class SlideInline(StackedInline):
 class SiteConfigAdmin(ModelAdmin):
     inlines = [SlideInline]
     list_display = ["generation", "president", "vice_president"]
-
-    def save_related(self, request, form, formsets, change):
-        print(form)
-
-        return super().save_related(request, form, formsets, change)
 
 
 @register(ApplyConfig)
@@ -40,3 +36,8 @@ class ApplyFormAdmin(ModelAdmin):
 @register(SNSImage)
 class SNSImageAdmin(ModelAdmin):
     pass
+
+
+@register(MailList)
+class MailListAdmin(ModelAdmin):
+    list_display = ["name", "email"]

@@ -1,11 +1,11 @@
 import locale
 from datetime import timedelta
 
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
+from django.template.loader import render_to_string
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, FormView, ListView, TemplateView
 
@@ -17,7 +17,8 @@ from .tasks import send_new_apply_notification
 class TitleView(TemplateView):
     template_name = "index.html"
 
-    def get_generation_str(self, config):
+    @staticmethod
+    def get_generation_str(config):
         generation = str(config.generation)
         if generation[-1] == "1":
             return generation + "st"
@@ -107,8 +108,8 @@ class ApplyView(LoginRequiredMixin, FormView):
                 image = SNSImage.objects.create(application=apply)
                 image.image.save(sns.name, sns)
 
-        if is_new and not settings.DEBUG:
-            send_new_apply_notification(apply.name, apply.university, apply.apply_type)
+        content = render_to_string('apply/application.html', self.get_context_data())
+        send_new_apply_notification(apply.name, apply.university, apply.apply_type.name, content)
 
         messages.success(self.request, "지원이 접수되었습니다!")
         return redirect("/")
@@ -147,9 +148,7 @@ class ApplyListView(ListView):
 @method_decorator(name="get", decorator=staff_member_required(login_url="/login/"))
 class ApplyDetailView(DetailView):
     model = ApplyForm
-
-    def get_template_names(self):
-        return "apply/application.html"
+    template_name = "apply/application.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

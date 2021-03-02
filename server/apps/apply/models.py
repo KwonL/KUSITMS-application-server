@@ -136,5 +136,5 @@ class MailList(models.Model):
     email = models.EmailField("이메일")
 
     class Meta:
-        verbose_name = "이메일 리스트"
-        verbose_name_plural = "이메일 리스트"
+        verbose_name = "지원 알림 이메일 리스트"
+        verbose_name_plural = "지원 알림 이메일 리스트"

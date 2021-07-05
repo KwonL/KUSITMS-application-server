@@ -148,7 +148,7 @@ body{font-family: Roboto;}blockquote{border-color: #2B689C;}.display-1{font-fami
           {% for apply_type in apply_types %}
             <a class="btn btn-md btn-primary display-7" href="/apply/{{ apply_type.0 }}/">{{ apply_type.1 }} 지원/수정하기</a>
           {% endfor %}
-          <a class="btn btn-md btn-primary display-7" href="{{ site_config.recruitment_summary.url }}" target="_blank" rel="noopener noreferrer">모집요강</a>
+          <a class="btn btn-md btn-primary display-7" href="{{ site_config.recruitment_summary }}" target="_blank" rel="noopener noreferrer">모집요강</a>
         </div>
     </div>
     <amp-image-lightbox id="lightbox1" layout="nodisplay">

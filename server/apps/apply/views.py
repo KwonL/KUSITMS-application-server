@@ -109,7 +109,8 @@ class ApplyView(LoginRequiredMixin, FormView):
                 image.image.save(sns.name, sns)
 
         content = render_to_string('apply/application.html', self.get_context_data())
-        send_new_apply_notification(apply.name, apply.university, apply.apply_type.name, content)
+        if is_new:
+            send_new_apply_notification(apply.name, apply.university, apply.apply_type.name, content)
 
         messages.success(self.request, "지원이 접수되었습니다!")
         return redirect("/")

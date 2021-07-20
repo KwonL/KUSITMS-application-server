@@ -13,3 +13,6 @@ redis==3.5.3
 # Dev
 black==19.10b0
 flake8==3.7.9
+
+# Error
+sentry-sdk==1.3.0

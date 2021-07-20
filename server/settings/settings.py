@@ -1,6 +1,8 @@
 import os
 
+import sentry_sdk
 from dotenv import load_dotenv
+from sentry_sdk.integrations.django import DjangoIntegration
 
 load_dotenv()
 
@@ -157,3 +159,12 @@ HUEY = {
         "health_check_interval": 1,
     },
 }
+
+sentry_sdk.init(
+    dsn="https://ed4f18a8329248218cc48b6221dcf917@o923971.ingest.sentry.io/5871853",
+    integrations=[DjangoIntegration()],
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)

@@ -6,6 +6,11 @@ from django.urls import include, path
 from apps.account import views as account_views
 from apps.apply import views as apply_views
 
+
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", apply_views.TitleView.as_view()),
@@ -18,6 +23,7 @@ urlpatterns = [
     # scoring
     path("internal/list/", apply_views.ApplyListView.as_view()),
     path("internal/list/<int:pk>/", apply_views.ApplyDetailView.as_view()),
+    path('sentry-debug/', trigger_error),
 ]
 
 if settings.DEBUG:
